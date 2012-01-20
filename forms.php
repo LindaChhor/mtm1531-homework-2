@@ -5,7 +5,7 @@
 /*error_reporting(-1);
 ini_set('display_errors', 'on');*/
 
-var_dump($_POST);
+//var_dump($_POST);
 
 ?>
 <!DOCTYPE HTML>
@@ -13,68 +13,71 @@ var_dump($_POST);
 <head>
 <meta charset="utf-8">
 <title>Forms</title>
+<link href="css/general.css" rel="stylesheet">
 </head>
 
 <body>
 
 <form action="forms.php" method="post">
-
-	<label for="firstnum">Number 1</label>
-    <input id="firstnum" name="firstnum">
+	<p><strong><h1>Supa Calculatar</strong></h1></p>
+	<div class ="num1">
+        <label for="firstnum" >Number 1</label>
+        <input id="firstnum" name="firstnum">
+    </div><p>
+    <div class ="num2">
+        <label for="secondnum">Number 2</label>
+        <input type="numbers" id="secondnum" name="secondnum">
+    </div>
     
-    <label for="secondnum">Number 2</label>
-    <input type="numbers" id="secondnum" name="secondnum">
-     
-    <label for="symbol">select</label>
-    <select id="symbol" name="secondnum">
-        <option value="t">x</option>
-        <option value="a">+</option>
-        <option value="s">-</option>
-        <option value="d">/</option>
+    <p><label for="symbols">select</label>
+    	<select id="symbols" name="symbols">
+        <option value="x">x</option>
+        <option value="+">+</option>
+        <option value="-">-</option>
+        <option value="/">/</option>
     </select>
-    
-    <button type="submit">calculate</button>
+   
+   <p> <button type="submit">calculate</button>
 </form>
+
 
 <?php if (!empty($_POST['firstnum']) && !empty($_POST['secondnum'])) : ?>
 
-<?php
+	<?php
+	$firstnum = $_POST['firstnum'];
+    $secondnum = $_POST['secondnum'];
+    $symbols = $_POST['symbols']; ?>
 
-$firstnum = 10;
-$secondnum = 20;
-$sum_total = $firstnum * $secondnum;
-
-print ($sum_total);
-
-?>
+    <?php if ($_POST['symbols'] == 'x') : ?> 
+    <?php $sum_total = $firstnum * $secondnum; ?>
+    <p id="results">The numbers <?php echo $_POST['firstnum']; ?> x <? echo $_POST['secondnum'];?> = <?php print ($sum_total); ?></p>
+    <span id="results">The 13 Percent Tax = <?php print number_format ($sum_total * 0.13); ?>  </span>
     
-    <p><strong>do the numbers <?php echo $_POST['firstnum']; ?> and <? echo $_POST['secondnum'];?> equals that? </strong></p>
-   
-    <?php if ($_POST['t'] == '*') : ?>
-    	<p>even number</p>
+	<?php elseif ($_POST['symbols'] == '+') : ?>
+    <?php $sum_total = $firstnum + $secondnum; ?>
+    <p id="results">The numbers <?php echo $_POST['firstnum']; ?> + <? echo $_POST['secondnum'];?> = <?php print ($sum_total); ?></p>
+	<span id="results">The Percent Tax = <?php print number_format ($sum_total * 0.13); ?> </span>
+    
+    <?php elseif ($_POST['symbols'] == '-') : ?>
+    <?php $sum_total = $firstnum - $secondnum; ?>
+    <p id="results">The numbers <?php echo $_POST['firstnum']; ?> - <? echo $_POST['secondnum'];?> = <?php print ($sum_total); ?></p>
+	<span id="results">The 13 Percent Tax = <?php print number_format ($sum_total * 0.13); ?> </span>
+    
+    <?php elseif ($_POST['symbols'] == '/') : ?>
+    <?php $sum_total = $firstnum / $secondnum; ?>
+    <p id="results">The numbers <?php echo $_POST['firstnum']; ?> / <? echo $_POST['secondnum'];?> = <?php print ($sum_total); ?></p>
+	<span id="results">The 13 Percent Tax = <?php print number_format ($sum_total * 0.13); ?> </span>
+  
+    <?php else : ?>
         
-    <?php elseif ($_POST['a'] == '+') : ?>
-    	<p>What an odd number</p>
+       
         
-   <?php else : ?>
-   	<p>I might be wrong</p>
+<?php endif; ?>
+ 
+<?php endif; ?>
     
-   <?php endif; ?>
     
-    
- 	<?php
-		$moon_diff = $_POST['secondnum'] * firstnum;
-	?>
-    
- 	<p><?php echo $_POST['firstnum']; ?> has <?php echo $moon_diff; ?> the this </p> 
-    
- <?php endif; ?>    
 
-
-if symbol == t
-  total = firstnum * secondnum
-elseif symbol = a
-  total = 
 
 </body>
 </html>
